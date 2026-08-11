@@ -18,7 +18,7 @@ You'll need [Node.js](https://nodejs.org) 18+ installed.
 ```bash
 cd family-chat
 npm install
-FAMILY_PASSCODE=yourpasscode FAMILY_NAME="Damdar Family" npm start
+FAMILY_PASSCODE=yourpasscode FAMILY_NAME="Loving Family" npm start
 ```
 
 Open `http://localhost:3000` in a couple of browser tabs to test chatting
@@ -66,6 +66,16 @@ save to their home screen like an app icon.
 - **Presence:** the left rail shows who's currently online.
 - **History:** the last 500 messages are kept in `messages.json` on the
   server and reloaded for anyone who joins.
+- **Emoji:** the 😊 button next to the input opens a quick-pick panel.
+- **Themes:** the 🎨 button in the header switches the whole app between
+  Classic, Pink Heart, Blue Ocean, Pearl, and Sunflower. Each person's
+  choice is saved on their own device only.
+- **@mentions:** typing `@Name` (matching how someone typed their name
+  when they joined) highlights it and sends that person a browser
+  notification, even if the chat tab isn't focused. `@all` or `@everyone`
+  notifies the whole table. The first time someone opens the chat, a 🔔
+  button appears in the header — they need to click it once and allow
+  notifications in their browser for this to work.
 
 ## Changing things later
 
