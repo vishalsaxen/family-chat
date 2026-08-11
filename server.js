@@ -68,6 +68,31 @@ function broadcastPresence() {
   io.emit('presence', { online: presenceList(), count: online.size });
 }
 
+// Find which online members were tagged with @name in a message.
+// Matches longest names first so "@Sam" doesn't wrongly match "Samantha".
+function findMentionedSocketIds(text, senderSocketId) {
+  const lowerText = text.toLowerCase();
+  const matchedNames = new Set();
+
+  if (/@(all|everyone)\b/i.test(text)) {
+    return Array.from(online.keys()).filter(id => id !== senderSocketId);
+  }
+
+  const uniqueNames = Array.from(new Set(Array.from(online.values()).map(u => u.name)))
+    .sort((a, b) => b.length - a.length);
+
+  for (const name of uniqueNames) {
+    const token = '@' + name.toLowerCase();
+    if (lowerText.includes(token)) matchedNames.add(name);
+  }
+
+  const socketIds = [];
+  for (const [id, user] of online.entries()) {
+    if (id !== senderSocketId && matchedNames.has(user.name)) socketIds.push(id);
+  }
+  return socketIds;
+}
+
 io.on('connection', (socket) => {
   let joined = false;
 
@@ -128,6 +153,11 @@ io.on('connection', (socket) => {
     messages.push(msg);
     saveMessages(messages);
     io.emit('message', msg);
+
+    const mentionedIds = findMentionedSocketIds(cleanText, socket.id);
+    mentionedIds.forEach(id => {
+      io.to(id).emit('mention', msg);
+    });
   });
 
   socket.on('typing', () => {
