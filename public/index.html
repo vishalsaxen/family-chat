@@ -44,12 +44,29 @@
       <header class="chat-header">
         <span id="chat-title">Family Table</span>
         <span id="typing-indicator" class="typing-indicator"></span>
+        <div class="header-actions">
+          <button id="notif-btn" type="button" class="icon-btn hidden" title="Enable notifications for @mentions">🔔</button>
+          <div class="theme-picker">
+            <button id="theme-btn" type="button" class="icon-btn" title="Change theme" aria-haspopup="true">🎨</button>
+            <div id="theme-menu" class="theme-menu hidden">
+              <button type="button" class="theme-option" data-theme="classic"><span class="swatch swatch-classic"></span>Classic</button>
+              <button type="button" class="theme-option" data-theme="pink-heart"><span class="swatch swatch-pink-heart"></span>Pink Heart</button>
+              <button type="button" class="theme-option" data-theme="blue-ocean"><span class="swatch swatch-blue-ocean"></span>Blue Ocean</button>
+              <button type="button" class="theme-option" data-theme="pearl"><span class="swatch swatch-pearl"></span>Pearl</button>
+              <button type="button" class="theme-option" data-theme="sunflower"><span class="swatch swatch-sunflower"></span>Sunflower</button>
+            </div>
+          </div>
+        </div>
       </header>
 
       <div id="message-list" class="message-list"></div>
 
       <form id="message-form" class="message-form">
-        <input id="message-input" type="text" placeholder="Say something to the table…" autocomplete="off" maxlength="2000" />
+        <div class="emoji-wrap">
+          <button id="emoji-btn" type="button" class="icon-btn" aria-label="Add emoji" aria-haspopup="true">😊</button>
+          <div id="emoji-panel" class="emoji-panel hidden"></div>
+        </div>
+        <input id="message-input" type="text" placeholder="Say something to the table… (@name to tag someone)" autocomplete="off" maxlength="2000" />
         <button type="submit" aria-label="Send">Send</button>
       </form>
     </section>
