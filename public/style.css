@@ -13,6 +13,53 @@
   --font-mono: 'IBM Plex Mono', monospace;
 }
 
+/* ---------- Themes ---------- */
+/* Classic (default) is the warm teal/amber "family table" look defined above. */
+
+[data-theme="pink-heart"] {
+  --bg: #3A1B2E;
+  --panel: #4A2438;
+  --panel-raised: #5A2C43;
+  --amber: #F0779E;
+  --cream: #FDEEF3;
+  --sage: #F0A6BE;
+  --muted: #C99AAF;
+  --border: rgba(253, 238, 243, 0.12);
+}
+
+[data-theme="blue-ocean"] {
+  --bg: #0B2A3D;
+  --panel: #103A52;
+  --panel-raised: #154763;
+  --amber: #4FB8D6;
+  --cream: #EAF6FA;
+  --sage: #6FD1C7;
+  --muted: #8FB4C4;
+  --border: rgba(234, 246, 250, 0.12);
+}
+
+[data-theme="pearl"] {
+  --bg: #EFEDE8;
+  --panel: #FBFAF7;
+  --panel-raised: #F1EEE8;
+  --amber: #A8955F;
+  --cream: #2E2B26;
+  --sage: #8FA89A;
+  --muted: #746F65;
+  --border: rgba(46, 43, 38, 0.10);
+}
+
+[data-theme="sunflower"] {
+  --bg: #3A2E12;
+  --panel: #4C3B16;
+  --panel-raised: #5D481B;
+  --amber: #F4C430;
+  --cream: #FFF8E4;
+  --sage: #9AB84B;
+  --muted: #D3B36A;
+  --border: rgba(255, 248, 228, 0.14);
+}
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -210,7 +257,7 @@ html, body {
   padding: 18px 28px;
   border-bottom: 1px solid var(--border);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
   font-family: var(--font-display);
   font-style: italic;
@@ -222,6 +269,127 @@ html, body {
   font-style: normal;
   font-size: 12px;
   color: var(--muted);
+  flex: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.icon-btn {
+  border: 1px solid var(--border);
+  background: var(--panel-raised);
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.12s ease, transform 0.12s ease;
+}
+
+.icon-btn:hover { filter: brightness(1.12); }
+.icon-btn:active { transform: scale(0.96); }
+
+.theme-picker { position: relative; }
+
+.theme-menu {
+  position: absolute;
+  top: 46px;
+  right: 0;
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 170px;
+  z-index: 20;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: none;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.theme-option:hover { background: var(--border); }
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.swatch-classic { background: linear-gradient(135deg, #17302E, #E8A33D); }
+.swatch-pink-heart { background: linear-gradient(135deg, #3A1B2E, #F0779E); }
+.swatch-blue-ocean { background: linear-gradient(135deg, #0B2A3D, #4FB8D6); }
+.swatch-pearl { background: linear-gradient(135deg, #EFEDE8, #A8955F); }
+.swatch-sunflower { background: linear-gradient(135deg, #3A2E12, #F4C430); }
+
+/* ---------- Emoji picker ---------- */
+.emoji-wrap { position: relative; }
+
+.emoji-panel {
+  position: absolute;
+  bottom: 52px;
+  left: 0;
+  width: 264px;
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  z-index: 20;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+}
+
+.emoji-panel button {
+  border: none;
+  background: none;
+  font-size: 19px;
+  padding: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.emoji-panel button:hover { background: var(--border); }
+
+/* ---------- Mentions ---------- */
+.mention-tag {
+  background: rgba(232, 163, 61, 0.22);
+  color: var(--amber);
+  border-radius: 5px;
+  padding: 0 3px;
+  font-weight: 600;
+}
+
+.msg.mentions-me .msg-text {
+  border: 1.5px solid var(--amber);
+  background: rgba(232, 163, 61, 0.12);
 }
 
 .message-list {
